@@ -69,7 +69,7 @@ function posts (state = {}, action) {
         ...state,
         [id]: {
           ...state[id],
-          voteScore: state[id].voteScore - 1,
+          voteScore: state[id].voteScore - 1
         }
       }
     default:
@@ -80,16 +80,67 @@ function posts (state = {}, action) {
 function comments (state = {}, action) {
   switch (action.type) {
     case ADD_COMMENT:
-      return state;
+      const { id, parentId, timestamp, body, author } = action;
+
+      return {
+        ...state,
+        [id]: {
+          id,
+          parentId,
+          timestap,
+          body,
+          author,
+          voteScore: 0,
+          deleted: false,
+          parentDeleted: false
+        }
+      }
     case EDIT_COMMENT:
-      return state;
+      const { id, body } = action;
+
+      return {
+        ...state,
+        [id]: {
+          ...state[id],
+          body
+        }
+      }
     case DELETE_COMMENT:
-      return state;
+      const { id } = action;
+
+      return {
+        ...state,
+        [id]: {
+          ...state[id],
+          deleted: true
+        }
+      }
     case UPVOTE_COMMENT:
-      return state;
+      const { id } = action;
+
+      return {
+        ...state,
+        [id]: {
+          ...state[id],
+          voteScore: state[id].voteScore + 1
+        }
+      }
     case DOWNVOTE_COMMENT:
-      return state;
+      const { id } = action;
+
+      return {
+        ...state,
+        [id]: {
+          ...state[id],
+          voteScore: state[id].voteScore - 1
+        }
+      }
     default:
       return state;
   }
 }
+
+export default combineReducers({
+  posts,
+  comments
+});
