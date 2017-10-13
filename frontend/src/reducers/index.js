@@ -17,6 +17,7 @@ function posts (state = {}, action) {
   switch (action.type) {
     case ADD_POST:
       const { id, timestamp, title, body, author, category } = action;
+
       return {
         ...state,
         [id]: {
@@ -31,13 +32,46 @@ function posts (state = {}, action) {
         }
       }
     case EDIT_POST:
-      return state;
+      const { id, title, body } = action;
+
+      return {
+        ...state,
+        [id]: {
+          ...state[id]
+          title,
+          body
+        }
+      }
     case DELETE_POST:
-      return state;
+      const { id } = action;
+
+      return {
+        ...state,
+        [id]: {
+          ...state[id],
+          deleted: true
+        }
+      }
     case UPVOTE_POST:
-      return state;
+      const { id } = action;
+
+      return {
+        ...state,
+        [id]: {
+          ...state[id],
+          voteScore: state[id].voteScore + 1,
+        }
+      }
     case DOWNVOTE_POST:
-      return state;
+      const { id } = action;
+
+      return {
+        ...state,
+        [id]: {
+          ...state[id],
+          voteScore: state[id].voteScore - 1,
+        }
+      }
     default:
       return state;
   }
