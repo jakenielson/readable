@@ -1,22 +1,9 @@
-# Readable API Server
+# Readable
 
-This is the starter project for the final assessment project for Udacity's Redux course where you will build a content and comment web app. Users will be able to post content to predefined categories, comment on their posts and other users' posts, and vote on posts and comments. Users will also be able to edit and delete posts and comments.
+A content and comment site I am building with React, Redux, and Bootstrap. Modeled after the popular site Reddit, this application allows the user to navigate between posts and comments organized by topic. React controls the various view components. Redux handles the bulk of the data fetched from a provided backend server. The react-redux tool hooks the two together, letting the Redux store be the single source of truth for the entire application. I'm using Bootstrap, Sass, and Gulp  to style the app.
 
-This repository includes the code for the backend API Server that you'll use to develop and interact with the front-end portion of the project.
+## To Run
 
-## Start Developing
+To run the project, clone or download the repository and navigate to the 'api-server' folder. Install the dependencies with `npm install`. Start the server with `npm start`.
 
-To get started developing right away:
-
-* Install and start the API server
-    - `cd api-server`
-    - `npm install`
-    - `node server`
-* In another terminal window, use Create React App to scaffold out the front-end
-    - `create-react-app frontend`
-    - `cd frontend`
-    - `npm start`
-
-## API Server
-
-Information about the API server and how to use it can be found in its [README file](api-server/README.md).
+Once the server is running, navigate to the 'frontend' folder. Install the dependencies with `npm install`. Start the app with `npm start`.
