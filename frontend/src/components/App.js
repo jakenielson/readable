@@ -1,8 +1,17 @@
 import React, { Component } from 'react';
 import logo from '../logo.svg';
 import '../App.css';
+import { connect } from 'react-redux';
+import * as api from '../utils/api';
 
 class App extends Component {
+  // Get initial posts and comments
+  componentDidMount = () => {
+    api.getAll().then(res => {
+      console.log(res);
+    });
+  }
+
   render() {
     return (
       <div className="App">
@@ -18,4 +27,11 @@ class App extends Component {
   }
 }
 
-export default App;
+function mapStateToProps (state) {
+  return {
+    posts: state.posts,
+    comments: state.comments
+  }
+}
+
+export default connect(mapStateToProps)(App);
