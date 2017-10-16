@@ -3,12 +3,15 @@ import logo from '../logo.svg';
 import '../App.css';
 import { connect } from 'react-redux';
 import * as api from '../utils/api';
+import { addPost } from '../actions'
 
 class App extends Component {
   // Get initial posts and comments
   componentDidMount = () => {
-    api.getAll().then(res => {
-      console.log(res);
+    api.getPosts().then(res => {
+      res.forEach(post => {
+        this.props.dispatch(addPost(post));
+      });
     });
   }
 
