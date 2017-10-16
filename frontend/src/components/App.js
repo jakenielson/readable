@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { BrowserRouter, Route } from 'react-router-dom';
 import * as api from '../utils/api';
 import { addPost } from '../actions';
 import PostList from './PostList';
+import PageHeader from './PageHeader';
 
 class App extends Component {
   // Get initial posts and comments
@@ -16,7 +18,28 @@ class App extends Component {
 
   render() {
     return (
-      <PostList posts={this.props.posts} />
+      <BrowserRouter>
+        <div className="app">
+          <Route path="/react" render={() => (
+            <div>
+              <PageHeader name="React" />
+              <PostList posts={this.props.posts} />
+            </div>
+          )}/>
+          <Route path="/redux" render={() => (
+            <div>
+              <PageHeader name="Redux" />
+              <PostList posts={this.props.posts} />
+            </div>
+          )}/>
+          <Route exact path="/" render={() => (
+            <div>
+              <PageHeader name="Readable" />
+              <PostList posts={this.props.posts} />
+            </div>
+          )}/>
+        </div>
+      </BrowserRouter>
     );
   }
 }
