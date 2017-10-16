@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
-import logo from '../logo.svg';
-import '../App.css';
 import { connect } from 'react-redux';
 import * as api from '../utils/api';
-import { addPost } from '../actions'
+import { addPost } from '../actions';
+import PostList from './PostList';
 
 class App extends Component {
   // Get initial posts and comments
@@ -17,23 +16,26 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-      </div>
+      <PostList posts={this.props.posts} />
     );
   }
 }
 
 function mapStateToProps (state) {
+  var posts = [];
+  var comments = [];
+
+  for (var post in state.posts) {
+    posts.push(state.posts[post]);
+  }
+
+  for (var comment in state.comments) {
+    comments.push(state.comments[comment]);
+  }
+
   return {
-    posts: state.posts,
-    comments: state.comments
+    posts: posts,
+    comments: comments
   }
 }
 
