@@ -14,9 +14,11 @@ import {
 } from '../actions';
 
 function posts (state = {}, action) {
+  const { id, title, body } = action;
+
   switch (action.type) {
     case ADD_POST:
-      const { id, timestamp, title, body, author, category } = action;
+      const { timestamp, author, category } = action;
 
       return {
         ...state,
@@ -32,19 +34,15 @@ function posts (state = {}, action) {
         }
       }
     case EDIT_POST:
-      const { id, title, body } = action;
-
       return {
         ...state,
         [id]: {
-          ...state[id]
+          ...state[id],
           title,
           body
         }
       }
     case DELETE_POST:
-      const { id } = action;
-
       return {
         ...state,
         [id]: {
@@ -53,8 +51,6 @@ function posts (state = {}, action) {
         }
       }
     case UPVOTE_POST:
-      const { id } = action;
-
       return {
         ...state,
         [id]: {
@@ -63,8 +59,6 @@ function posts (state = {}, action) {
         }
       }
     case DOWNVOTE_POST:
-      const { id } = action;
-
       return {
         ...state,
         [id]: {
@@ -78,16 +72,18 @@ function posts (state = {}, action) {
 }
 
 function comments (state = {}, action) {
+  const { id, body } = action;
+
   switch (action.type) {
     case ADD_COMMENT:
-      const { id, parentId, timestamp, body, author } = action;
+      const { parentId, timestamp, author } = action;
 
       return {
         ...state,
         [id]: {
           id,
           parentId,
-          timestap,
+          timestamp,
           body,
           author,
           voteScore: 0,
@@ -96,8 +92,6 @@ function comments (state = {}, action) {
         }
       }
     case EDIT_COMMENT:
-      const { id, body } = action;
-
       return {
         ...state,
         [id]: {
@@ -106,8 +100,6 @@ function comments (state = {}, action) {
         }
       }
     case DELETE_COMMENT:
-      const { id } = action;
-
       return {
         ...state,
         [id]: {
@@ -116,8 +108,6 @@ function comments (state = {}, action) {
         }
       }
     case UPVOTE_COMMENT:
-      const { id } = action;
-
       return {
         ...state,
         [id]: {
@@ -126,8 +116,6 @@ function comments (state = {}, action) {
         }
       }
     case DOWNVOTE_COMMENT:
-      const { id } = action;
-
       return {
         ...state,
         [id]: {
