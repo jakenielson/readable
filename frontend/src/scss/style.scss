@@ -1,3 +1,16 @@
-.navbar{
+.navbar {
   opacity: 0.9;
+}
+
+.post-list {
+  list-style: none;
+}
+
+.post-preview {
+  box-shadow: 5px 5px 3px grey;
+  margin: 10px;
+
+  h3 {
+    margin-top: 10px;
+  }
 }

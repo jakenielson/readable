@@ -6,6 +6,7 @@ class PostList extends Component {
     posts: []
   }
 
+  //Filter posts on mount
   componentWillMount = () => {
     if (this.props.category === "all") {
       this.setState({posts: this.props.posts});
@@ -16,6 +17,7 @@ class PostList extends Component {
     }
   }
 
+  //Filter posts on update
   componentWillReceiveProps = (nextProps) => {
     if (nextProps.category === 'all') {
       this.setState({posts: nextProps.posts});
@@ -28,6 +30,8 @@ class PostList extends Component {
 
   render() {
     const { posts } = this.state;
+
+    console.log('Posts', posts);
 
     return (
       <ul className='post-list'>
