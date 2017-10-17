@@ -8,7 +8,7 @@ import PageHeader from './PageHeader';
 
 class App extends Component {
   // Get initial posts and comments
-  componentDidMount = () => {
+  componentWillMount = () => {
     api.getPosts().then(res => {
       res.forEach(post => {
         this.props.dispatch(addPost(post));
@@ -23,19 +23,19 @@ class App extends Component {
           <Route path="/react" render={() => (
             <div>
               <PageHeader name="React" />
-              <PostList posts={this.props.posts} />
+              <PostList category="react" posts={this.props.posts} />
             </div>
           )}/>
           <Route path="/redux" render={() => (
             <div>
               <PageHeader name="Redux" />
-              <PostList posts={this.props.posts} />
+              <PostList category="redux" posts={this.props.posts} />
             </div>
           )}/>
           <Route exact path="/" render={() => (
             <div>
               <PageHeader name="Readable" />
-              <PostList posts={this.props.posts} />
+              <PostList category="all" posts={this.props.posts} />
             </div>
           )}/>
         </div>
