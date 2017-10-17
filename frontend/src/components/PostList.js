@@ -21,7 +21,8 @@ class PostList extends Component {
       this.setState({posts: nextProps.posts});
     }
     else {
-      this.setState({posts: nextProps.posts.filter(post => post.category = nextProps.category)});
+      const posts = nextProps.posts.filter(post => post.category === nextProps.category);
+      this.setState({posts: posts});
     }
   }
 
