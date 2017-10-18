@@ -32,6 +32,12 @@ class App extends Component {
               <PostList category="redux" posts={this.props.posts} />
             </div>
           )}/>
+          <Route path="/post" render={() => (
+            <div>
+              <PageHeader name="Readable" />
+              <h2>I AM POST VIEW</h2>
+            </div>
+          )}/>
           <Route exact path="/" render={() => (
             <div>
               <PageHeader name="Readable" />

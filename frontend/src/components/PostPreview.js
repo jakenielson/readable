@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 export default function PostPreview ({ post }) {
   return (
@@ -9,7 +10,7 @@ export default function PostPreview ({ post }) {
         <i className="fa fa-arrow-down"></i>
       </div>
       <div className="media-body m-3">
-        <h3>{ post.title }</h3>
+        <Link to={`/post/${ post.id }`}><h3>{ post.title }</h3></Link>
       </div>
     </div>
   );
