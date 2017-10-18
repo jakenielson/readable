@@ -45,20 +45,9 @@ class App extends Component {
 }
 
 function mapStateToProps (state) {
-  var posts = [];
-  var comments = [];
-
-  for (var post in state.posts) {
-    posts.push(state.posts[post]);
-  }
-
-  for (var comment in state.comments) {
-    comments.push(state.comments[comment]);
-  }
-
   return {
-    posts: posts,
-    comments: comments
+    posts: state.posts,
+    comments: state.comments
   }
 }
 

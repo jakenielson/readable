@@ -2,42 +2,48 @@ import React, { Component } from 'react';
 import PostPreview from './PostPreview';
 
 class PostList extends Component {
+  //Tracks the filtered list of posts, but only by ID
   state = {
-    posts: []
+    postIds: []
   }
 
   //Filter posts on mount
   componentWillMount = () => {
+    let postIds = [];
+
     if (this.props.category === "all") {
-      this.setState({posts: this.props.posts});
+      postIds = Object.keys(this.props.posts);
     }
     else {
-      const posts = this.props.posts.filter(post => post.category === this.props.category);
-      this.setState({posts: posts});
+      postIds = Object.keys(this.props.posts).filter(post => this.props.posts[post].category === this.props.category);
     }
+
+    this.setState({postIds: postIds});
   }
 
   //Filter posts on update
   componentWillReceiveProps = (nextProps) => {
-    if (nextProps.category === 'all') {
-      this.setState({posts: nextProps.posts});
+    let postIds = [];
+
+    if (nextProps.category === "all") {
+      postIds = Object.keys(nextProps.posts);
     }
     else {
-      const posts = nextProps.posts.filter(post => post.category === nextProps.category);
-      this.setState({posts: posts});
+      postIds = Object.keys(nextProps.posts).filter(post => nextProps.posts[post].category === nextProps.category);
     }
+
+    this.setState({postIds: postIds});
   }
 
   render() {
-    const { posts } = this.state;
-
-    console.log('Posts', posts);
+    const { posts } = this.props;
+    const { postIds } = this.state;
 
     return (
       <ul className='post-list'>
-        {posts.map((post) => (
-          <li key={post.id}>
-            <PostPreview post={post} />
+        {postIds.map((postId) => (
+          <li key={postId}>
+            <PostPreview post={ posts[postId] } />
           </li>
         ))}
       </ul>
