@@ -43,7 +43,7 @@ class PostList extends Component {
       <ul className='post-list'>
         {postIds.map((postId) => (
           <li key={postId}>
-            <PostPreview post={ posts[postId] } />
+            <PostPreview post={ posts[postId] } selectPost={this.props.selectPost}/>
           </li>
         ))}
       </ul>
