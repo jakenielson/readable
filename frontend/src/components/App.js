@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { BrowserRouter, Route } from 'react-router-dom';
 import * as api from '../utils/api';
-import { addPost, selectCategory, clearPosts, selectPost, clearComments, addComment } from '../actions';
+import { addPost, selectCategory, clearPosts } from '../actions';
 import PostList from './PostList';
 import PageHeader from './PageHeader';
 import Post from './Post';
@@ -14,29 +14,8 @@ class App extends Component {
     this.props.dispatch(clearPosts());
     api.getPosts().then(res => {
       res.forEach(post => {
-        console.log(post);
         this.props.dispatch(addPost(post));
       });
-    });
-  }
-
-  changeCategory = (category) => {
-    this.props.dispatch(selectCategory(category));
-    this.props.dispatch(clearPosts());
-    api.getPostsInCategory(category).then(res => {
-      res.forEach(post => {
-        this.props.dispatch(addPost(post));
-      });
-    });
-  }
-
-  selectPost = (id) => {
-    this.props.dispatch(selectPost({ id }));
-    this.props.dispatch(clearComments());
-    api.getComments(id).then(res => {
-      res.forEach(comment => {
-        this.props.dispatch(addComment(comment));
-      })
     });
   }
 
@@ -50,27 +29,15 @@ class App extends Component {
         <div className="app">
           <Route path="/post" render={() => (
             <div>
-              <PageHeader showAllPosts={this.showAllPosts} changeCategory={this.changeCategory} name="Readable" />
+              <PageHeader showAllPosts={this.showAllPosts} />
               <Post />
               <CommentList />
             </div>
           )}/>
-          <Route path="/react" render={() => (
-            <div>
-              <PageHeader showAllPosts={this.showAllPosts} changeCategory={this.changeCategory} name="React" />
-              <PostList selectPost={this.selectPost}/>
-            </div>
-          )}/>
-          <Route path="/redux" render={() => (
-            <div>
-              <PageHeader showAllPosts={this.showAllPosts} changeCategory={this.changeCategory} name="Redux" />
-              <PostList selectPost={this.selectPost}/>
-            </div>
-          )}/>
           <Route exact path="/" render={() => (
             <div>
-              <PageHeader showAllPosts={this.showAllPosts} changeCategory={this.changeCategory} name="Readable" />
-              <PostList selectPost={this.selectPost}/>
+              <PageHeader showAllPosts={this.showAllPosts} />
+              <PostList />
             </div>
           )}/>
         </div>
