@@ -32,25 +32,25 @@ class App extends Component {
           <Route path="/post" render={() => (
             <div>
               <PageHeader name="Readable" />
-              <Post post={this.props.posts[this.state.selectedPost]}/>
+              <Post post={this.props.postList[this.state.selectedPost]}/>
             </div>
           )}/>
           <Route path="/react" render={() => (
             <div>
               <PageHeader name="React" />
-              <PostList category="react" posts={this.props.posts} selectPost={this.selectPost}/>
+              <PostList category="react" posts={this.props.postList} selectPost={this.selectPost}/>
             </div>
           )}/>
           <Route path="/redux" render={() => (
             <div>
               <PageHeader name="Redux" />
-              <PostList category="redux" posts={this.props.posts} selectPost={this.selectPost}/>
+              <PostList category="redux" posts={this.props.postList} selectPost={this.selectPost}/>
             </div>
           )}/>
           <Route exact path="/" render={() => (
             <div>
               <PageHeader name="Readable" />
-              <PostList category="all" posts={this.props.posts} selectPost={this.selectPost}/>
+              <PostList category="all" posts={this.props.postList} selectPost={this.selectPost}/>
             </div>
           )}/>
         </div>
@@ -61,8 +61,8 @@ class App extends Component {
 
 function mapStateToProps (state) {
   return {
-    posts: state.posts,
-    comments: state.comments
+    postList: state.postList,
+    commentList: state.commentList
   }
 }
 

@@ -6,14 +6,16 @@ import {
   DELETE_POST,
   UPVOTE_POST,
   DOWNVOTE_POST,
+  CLEAR_POSTS,
   ADD_COMMENT,
   EDIT_COMMENT,
   DELETE_COMMENT,
   UPVOTE_COMMENT,
-  DOWNVOTE_COMMENT
+  DOWNVOTE_COMMENT,
+  CLEAR_COMMENTS
 } from '../actions';
 
-function posts (state = {}, action) {
+function postList (state = {}, action) {
   const { id, title, body } = action;
 
   switch (action.type) {
@@ -66,12 +68,14 @@ function posts (state = {}, action) {
           voteScore: state[id].voteScore - 1
         }
       }
+    case CLEAR_POSTS:
+      return {}
     default:
       return state;
   }
 }
 
-function comments (state = {}, action) {
+function commentList (state = {}, action) {
   const { id, body } = action;
 
   switch (action.type) {
@@ -123,12 +127,14 @@ function comments (state = {}, action) {
           voteScore: state[id].voteScore - 1
         }
       }
+    case CLEAR_COMMENTS:
+      return {}
     default:
       return state;
   }
 }
 
 export default combineReducers({
-  posts,
-  comments
+  postList,
+  commentList
 });
