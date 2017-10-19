@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PostPreview from './PostPreview';
+import { connect } from 'react-redux';
 
 class PostList extends Component {
   render() {
@@ -10,11 +11,18 @@ class PostList extends Component {
       <ul className='post-list'>
         {ids && ids.map((id) => (
           <li key={id}>
-            <PostPreview post={ posts[id] } selectPost={this.props.selectPost}/>
+            <PostPreview id={ id } selectPost={this.props.selectPost}/>
           </li>
         ))}
       </ul>
     );
   }
 }
-export default PostList;
+
+function mapStateToProps (state) {
+  return {
+    posts: state.postList
+  }
+}
+
+export default connect(mapStateToProps)(PostList);

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Comment from './Comment';
+import { connect } from 'react-redux';
 
 class CommentList extends Component {
   render() {
@@ -17,4 +18,11 @@ class CommentList extends Component {
     );
   }
 }
-export default CommentList;
+
+function mapStateToProps (state) {
+  return {
+    comments: state.commentList
+  }
+}
+
+export default connect(mapStateToProps)(CommentList);

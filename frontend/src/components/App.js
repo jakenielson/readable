@@ -51,26 +51,26 @@ class App extends Component {
           <Route path="/post" render={() => (
             <div>
               <PageHeader showAllPosts={this.showAllPosts} changeCategory={this.changeCategory} name="Readable" />
-              <Post post={this.props.postList[this.props.activePost.id]}/>
-              <CommentList comments={this.props.commentList} />
+              <Post />
+              <CommentList />
             </div>
           )}/>
           <Route path="/react" render={() => (
             <div>
               <PageHeader showAllPosts={this.showAllPosts} changeCategory={this.changeCategory} name="React" />
-              <PostList posts={this.props.postList} selectPost={this.selectPost}/>
+              <PostList selectPost={this.selectPost}/>
             </div>
           )}/>
           <Route path="/redux" render={() => (
             <div>
               <PageHeader showAllPosts={this.showAllPosts} changeCategory={this.changeCategory} name="Redux" />
-              <PostList posts={this.props.postList} selectPost={this.selectPost}/>
+              <PostList selectPost={this.selectPost}/>
             </div>
           )}/>
           <Route exact path="/" render={() => (
             <div>
               <PageHeader showAllPosts={this.showAllPosts} changeCategory={this.changeCategory} name="Readable" />
-              <PostList posts={this.props.postList} selectPost={this.selectPost}/>
+              <PostList selectPost={this.selectPost}/>
             </div>
           )}/>
         </div>
