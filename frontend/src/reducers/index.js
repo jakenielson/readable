@@ -12,7 +12,9 @@ import {
   DELETE_COMMENT,
   UPVOTE_COMMENT,
   DOWNVOTE_COMMENT,
-  CLEAR_COMMENTS
+  CLEAR_COMMENTS,
+  SELECT_CATEGORY,
+  SELECT_POST
 } from '../actions';
 
 function postList (state = {}, action) {
@@ -134,7 +136,35 @@ function commentList (state = {}, action) {
   }
 }
 
+function activeCategory (state = { category: 'all' }, action) {
+  const { category } = action;
+
+  switch (action.type) {
+    case SELECT_CATEGORY:
+      return {
+        category
+      }
+    default:
+      return state;
+  }
+}
+
+function activePost (state = {}, action) {
+  const { id } = action;
+
+  switch (action.type) {
+    case SELECT_CATEGORY:
+      return {
+        id
+      }
+    default:
+      return state;
+  }
+}
+
 export default combineReducers({
   postList,
-  commentList
+  commentList,
+  activeCategory,
+  activePost
 });

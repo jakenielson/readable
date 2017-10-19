@@ -12,6 +12,9 @@ export const UPVOTE_COMMENT = 'UPVOTE_COMMENT';
 export const DOWNVOTE_COMMENT = 'DOWNVOTE_COMMENT';
 export const CLEAR_COMMENTS = 'CLEAR_COMMENTS';
 
+export const SELECT_CATEGORY = 'SELECT_CATEGORY';
+export const SELECT_POST = 'SELECT_POST';
+
 export function addPost ({ id, timestamp, title, body, author, category }) {
   return {
     type: ADD_POST,
@@ -103,5 +106,19 @@ export function downVoteComment ({ id }) {
 export function clearComments () {
   return {
     type: CLEAR_COMMENTS
+  }
+}
+
+export function selectCategory ({ category }) {
+  return {
+    type: SELECT_CATEGORY,
+    category
+  }
+}
+
+export function selectPost ({ id }) {
+  return {
+    type: SELECT_POST,
+    id
   }
 }
