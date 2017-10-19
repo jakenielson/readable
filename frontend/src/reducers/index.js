@@ -22,7 +22,7 @@ function postList (state = {}, action) {
 
   switch (action.type) {
     case ADD_POST:
-      const { timestamp, author, category } = action;
+      const { timestamp, author, category, voteScore, deleted } = action;
 
       return {
         ...state,
@@ -33,8 +33,8 @@ function postList (state = {}, action) {
           body,
           author,
           category,
-          voteScore: 0,
-          deleted: false
+          voteScore,
+          deleted
         }
       }
     case EDIT_POST:
@@ -82,7 +82,7 @@ function commentList (state = {}, action) {
 
   switch (action.type) {
     case ADD_COMMENT:
-      const { parentId, timestamp, author } = action;
+      const { parentId, timestamp, author, voteScore, deleted, parentDeleted } = action;
 
       return {
         ...state,
@@ -92,9 +92,9 @@ function commentList (state = {}, action) {
           timestamp,
           body,
           author,
-          voteScore: 0,
-          deleted: false,
-          parentDeleted: false
+          voteScore,
+          deleted,
+          parentDeleted
         }
       }
     case EDIT_COMMENT:

@@ -15,7 +15,7 @@ export const CLEAR_COMMENTS = 'CLEAR_COMMENTS';
 export const SELECT_CATEGORY = 'SELECT_CATEGORY';
 export const SELECT_POST = 'SELECT_POST';
 
-export function addPost ({ id, timestamp, title, body, author, category }) {
+export function addPost ({ id, timestamp, title, body, author, category, voteScore, deleted }) {
   return {
     type: ADD_POST,
     id,
@@ -23,7 +23,9 @@ export function addPost ({ id, timestamp, title, body, author, category }) {
     title,
     body,
     author,
-    category
+    category,
+    voteScore,
+    deleted
   }
 }
 
@@ -63,14 +65,17 @@ export function clearPosts () {
   }
 }
 
-export function addComment ({ id, parentId, timestamp, body, author }) {
+export function addComment ({ id, parentId, timestamp, body, author, voteScore, deleted, parentDeleted }) {
   return {
     type: ADD_COMMENT,
     id,
     parentId,
     timestamp,
     body,
-    author
+    author,
+    voteScore,
+    deleted,
+    parentDeleted
   }
 }
 
