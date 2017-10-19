@@ -142,6 +142,7 @@ function activeCategory (state = { category: 'all' }, action) {
   switch (action.type) {
     case SELECT_CATEGORY:
       return {
+        ...state,
         category
       }
     default:
@@ -153,8 +154,9 @@ function activePost (state = {}, action) {
   const { id } = action;
 
   switch (action.type) {
-    case SELECT_CATEGORY:
+    case SELECT_POST:
       return {
+        ...state,
         id
       }
     default:

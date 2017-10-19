@@ -2,27 +2,38 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { BrowserRouter, Route } from 'react-router-dom';
 import * as api from '../utils/api';
-import { addPost } from '../actions';
+import { addPost, selectCategory, clearPosts, selectPost } from '../actions';
 import PostList from './PostList';
 import PageHeader from './PageHeader';
 import Post from './Post';
 
 class App extends Component {
-  state = {
-    selectedPost: ''
-  }
-
-  selectPost = (post) => {
-    this.setState({ selectedPost: post });
-  }
-
-  // Get initial posts and comments
-  componentWillMount = () => {
+  showAllPosts = () => {
+    this.props.dispatch(selectCategory('all'));
+    this.props.dispatch(clearPosts());
     api.getPosts().then(res => {
       res.forEach(post => {
         this.props.dispatch(addPost(post));
       });
     });
+  }
+
+  changeCategory = (category) => {
+    this.props.dispatch(selectCategory(category));
+    this.props.dispatch(clearPosts());
+    api.getPostsInCategory(category).then(res => {
+      res.forEach(post => {
+        this.props.dispatch(addPost(post));
+      });
+    });
+  }
+
+  selectPost = (id) => {
+    this.props.dispatch(selectPost({ id }));
+  }
+
+  componentWillMount = () => {
+    this.showAllPosts();
   }
 
   render() {
@@ -31,26 +42,26 @@ class App extends Component {
         <div className="app">
           <Route path="/post" render={() => (
             <div>
-              <PageHeader name="Readable" />
-              <Post post={this.props.postList[this.state.selectedPost]}/>
+              <PageHeader showAllPosts={this.showAllPosts} changeCategory={this.changeCategory} name="Readable" />
+              <Post post={this.props.postList[this.props.activePost.id]}/>
             </div>
           )}/>
           <Route path="/react" render={() => (
             <div>
-              <PageHeader name="React" />
-              <PostList category="react" posts={this.props.postList} selectPost={this.selectPost}/>
+              <PageHeader showAllPosts={this.showAllPosts} changeCategory={this.changeCategory} name="React" />
+              <PostList posts={this.props.postList} selectPost={this.selectPost}/>
             </div>
           )}/>
           <Route path="/redux" render={() => (
             <div>
-              <PageHeader name="Redux" />
-              <PostList category="redux" posts={this.props.postList} selectPost={this.selectPost}/>
+              <PageHeader showAllPosts={this.showAllPosts} changeCategory={this.changeCategory} name="Redux" />
+              <PostList posts={this.props.postList} selectPost={this.selectPost}/>
             </div>
           )}/>
           <Route exact path="/" render={() => (
             <div>
-              <PageHeader name="Readable" />
-              <PostList category="all" posts={this.props.postList} selectPost={this.selectPost}/>
+              <PageHeader showAllPosts={this.showAllPosts} changeCategory={this.changeCategory} name="Readable" />
+              <PostList posts={this.props.postList} selectPost={this.selectPost}/>
             </div>
           )}/>
         </div>
@@ -62,7 +73,9 @@ class App extends Component {
 function mapStateToProps (state) {
   return {
     postList: state.postList,
-    commentList: state.commentList
+    commentList: state.commentList,
+    activePost: state.activePost,
+    activeCategory: state.activeCategory
   }
 }
 
