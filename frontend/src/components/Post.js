@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { upVotePost, downVotePost } from '../actions';
+import { Link } from 'react-router-dom';
+import { upVotePost, downVotePost, deletePost } from '../actions';
 import * as api from '../utils/api';
 
 class Post extends Component {
@@ -12,6 +13,11 @@ class Post extends Component {
   downvote = () => {
     api.downVotePost(this.props.post.id);
     this.props.dispatch(downVotePost(this.props.post));
+  }
+
+  delete = () => {
+    api.deletePost(this.props.post.id);
+    this.props.dispatch(deletePost(this.props.post));
   }
 
   render() {
@@ -26,6 +32,7 @@ class Post extends Component {
           </div>
           <div className="media-body m-3">
             <h3>{ post.title }</h3>
+            <Link to={`/`} onClick={this.delete}>Delete</Link>
           </div>
         </div>
 

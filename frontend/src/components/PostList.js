@@ -17,7 +17,7 @@ class PostList extends Component {
 
   render() {
     const { posts } = this.props;
-    const ids = Object.keys(posts);
+    const ids = Object.keys(posts).filter(key => !posts[key].deleted);
 
     return (
       <ul className='post-list'>

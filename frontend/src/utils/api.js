@@ -31,3 +31,6 @@ export const upVoteComment = (id) =>
 
 export const downVoteComment = (id) =>
   fetch(`${api}/comments/${id}`, { method: "POST", headers, body: JSON.stringify({ option: 'downVote' }) })
+
+export const deletePost = (id) =>
+  fetch(`${api}/posts/${id}`, { method: "DELETE", headers })

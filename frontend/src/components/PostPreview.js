@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { upVotePost, downVotePost } from '../actions';
+import { upVotePost, downVotePost, deletePost } from '../actions';
 import * as api from '../utils/api';
 
 class PostPreview extends Component {
@@ -13,6 +13,11 @@ class PostPreview extends Component {
   downvote = () => {
     api.downVotePost(this.props.post.id);
     this.props.dispatch(downVotePost(this.props.post));
+  }
+
+  delete = () => {
+    api.deletePost(this.props.post.id);
+    this.props.dispatch(deletePost(this.props.post));
   }
 
   render() {
@@ -27,6 +32,7 @@ class PostPreview extends Component {
         </div>
         <div className="media-body m-3">
           <Link to={`/post/${ post.id }`} onClick={ () => { selectPost(post.id) } }><h3>{ post.title }</h3></Link>
+          <button onClick={this.delete}>Delete</button>
         </div>
       </div>
     );
