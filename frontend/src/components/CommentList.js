@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 class CommentList extends Component {
   render() {
     const { comments } = this.props;
-    const ids = Object.keys(comments);
+    const ids = Object.keys(comments).filter(key => !comments[key].deleted);
 
     return (
       <ul className='post-list'>

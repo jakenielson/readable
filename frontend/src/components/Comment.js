@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { upVoteComment, downVoteComment } from '../actions';
+import { upVoteComment, downVoteComment, deleteComment } from '../actions';
 import * as api from '../utils/api';
 
 class Comment extends Component {
@@ -12,6 +12,11 @@ class Comment extends Component {
   downvote = () => {
     api.downVoteComment(this.props.comment.id);
     this.props.dispatch(downVoteComment(this.props.comment));
+  }
+
+  delete = () => {
+    api.deleteComment(this.props.comment.id);
+    this.props.dispatch(deleteComment(this.props.comment));
   }
 
   render() {
@@ -26,6 +31,7 @@ class Comment extends Component {
         </div>
         <div className="media-body m-3">
           <p>{ comment.body }</p>
+          <button onClick={this.delete}>Delete</button>
         </div>
       </div>
     );
