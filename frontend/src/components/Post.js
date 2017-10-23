@@ -1,16 +1,28 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { upVotePost, downVotePost } from '../actions';
+import * as api from '../utils/api';
 
 class Post extends Component {
+  upvote = () => {
+    api.upVotePost(this.props.post.id);
+    this.props.dispatch(upVotePost(this.props.post));
+  }
+
+  downvote = () => {
+    api.downVotePost(this.props.post.id);
+    this.props.dispatch(downVotePost(this.props.post));
+  }
+
   render() {
     const { post } = this.props;
     return(
       <div className="post">
         <div className="post-header media m-2">
           <div className="d-flex flex-column m-3">
-            <i className="fa fa-arrow-up"></i>
+            <button onClick={this.upvote}><i className="fa fa-arrow-up"></i></button>
             <span className="text-center">{ post.voteScore }</span>
-            <i className="fa fa-arrow-down"></i>
+            <button onClick={this.downvote}><i className="fa fa-arrow-down"></i></button>
           </div>
           <div className="media-body m-3">
             <h3>{ post.title }</h3>
