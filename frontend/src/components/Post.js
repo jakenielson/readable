@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { upVotePost, downVotePost, deletePost } from '../actions';
+import { upVotePost, downVotePost, deletePost, editPost } from '../actions';
 import * as api from '../utils/api';
 
 class Post extends Component {
@@ -20,6 +20,14 @@ class Post extends Component {
     this.props.dispatch(deletePost(this.props.post));
   }
 
+  edit = () => {
+    const title = document.querySelector("#input-post-title").value;
+    const body = document.querySelector("#input-post-body").value;
+
+    api.editPost(this.props.post.id, title, body);
+    this.props.dispatch(editPost({...this.props.post, title, body}));
+  }
+
   render() {
     const { post } = this.props;
     return(
@@ -33,11 +41,39 @@ class Post extends Component {
           <div className="media-body m-3">
             <h3>{ post.title }</h3>
             <Link to={`/`} onClick={this.delete}>Delete</Link>
+            <button data-toggle="modal" data-target="#editModal">Edit</button>
           </div>
         </div>
 
         <div className="post-body m-2">
           <p>{ post.body }</p>
+        </div>
+
+        <div className="modal" id="editModal">
+          <div className="modal-dialog">
+            <div className="modal-content">
+              <div className="modal-header">
+                <h5 className="modal-title">Edit Post</h5>
+                <button className="close" data-dismiss="modal">&times;</button>
+              </div>
+              <div className="modal-body">
+                <form>
+                  <div className="form-group">
+                    <label htmlFor="title">Title</label>
+                    <textarea id="input-post-title" rows="2" className="form-control" defaultValue={post.title}></textarea>
+                  </div>
+                  <div className="form-group">
+                    <label htmlFor="body">Body</label>
+                    <textarea id="input-post-body" rows="5" className="form-control" defaultValue={post.body}></textarea>
+                  </div>
+                </form>
+              </div>
+              <div className="modal-footer">
+                <button className="btn btn-primary" onClick={this.edit} data-dismiss="modal">Submit</button>
+                <button className="btn btn-secondary" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     )

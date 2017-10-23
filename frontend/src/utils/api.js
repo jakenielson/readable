@@ -34,3 +34,6 @@ export const downVoteComment = (id) =>
 
 export const deletePost = (id) =>
   fetch(`${api}/posts/${id}`, { method: "DELETE", headers })
+
+export const editPost = (id, title, body) =>
+  fetch(`${api}/posts/${id}`, { method: "PUT", headers, body: JSON.stringify({ title, body })})
