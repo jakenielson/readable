@@ -22,10 +22,12 @@ export const getComments = (id) =>
 
 export const upVotePost = (id) =>
   fetch(`${api}/posts/${id}`, { method: "POST", headers, body: JSON.stringify({ option: 'upVote' }) })
-    .then(res => res.json())
-    .then(data => data)
 
 export const downVotePost = (id) =>
   fetch(`${api}/posts/${id}`, { method: "POST", headers, body: JSON.stringify({ option: 'downVote' }) })
-    .then(res => res.json())
-    .then(data => data)
+
+export const upVoteComment = (id) =>
+  fetch(`${api}/comments/${id}`, { method: "POST", headers, body: JSON.stringify({ option: 'upVote' }) })
+
+export const downVoteComment = (id) =>
+  fetch(`${api}/comments/${id}`, { method: "POST", headers, body: JSON.stringify({ option: 'downVote' }) })

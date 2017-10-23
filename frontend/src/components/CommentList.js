@@ -11,7 +11,7 @@ class CommentList extends Component {
       <ul className='post-list'>
         {ids && ids.map((id) => (
           <li key={id}>
-            <Comment comment={ comments[id] } />
+            <Comment id={ comments[id].id } />
           </li>
         ))}
       </ul>
