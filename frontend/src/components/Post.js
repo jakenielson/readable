@@ -41,7 +41,7 @@ class Post extends Component {
           <div className="media-body m-3">
             <h3>{ post.title }</h3>
             <Link to={`/`} onClick={this.delete}>Delete</Link>
-            <button data-toggle="modal" data-target="#editModal">Edit</button>
+            <button data-toggle="modal" data-target="#editPostModal">Edit</button>
           </div>
         </div>
 
@@ -49,7 +49,7 @@ class Post extends Component {
           <p>{ post.body }</p>
         </div>
 
-        <div className="modal" id="editModal">
+        <div className="modal" id="editPostModal">
           <div className="modal-dialog">
             <div className="modal-content">
               <div className="modal-header">

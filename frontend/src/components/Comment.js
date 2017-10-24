@@ -20,7 +20,7 @@ class Comment extends Component {
   }
 
   render() {
-    const { comment } = this.props;
+    const { comment, open } = this.props;
 
     return (
       <div className="post-preview media m-2">
@@ -32,6 +32,7 @@ class Comment extends Component {
         <div className="media-body m-3">
           <p>{ comment.body }</p>
           <button onClick={this.delete}>Delete</button>
+          <button onClick={ () => { open(comment.id, comment.body) } } data-toggle="modal" data-target="#editCommentModal">Edit</button>
         </div>
       </div>
     );

@@ -79,10 +79,11 @@ export function addComment ({ id, parentId, timestamp, body, author, voteScore, 
   }
 }
 
-export function editComment ({ id, body }) {
+export function editComment ({ id, timestamp, body }) {
   return {
     type: EDIT_COMMENT,
     id,
+    timestamp,
     body
   }
 }

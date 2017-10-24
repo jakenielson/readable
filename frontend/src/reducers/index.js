@@ -102,6 +102,7 @@ function commentList (state = {}, action) {
         ...state,
         [id]: {
           ...state[id],
+          timestamp,
           body
         }
       }
