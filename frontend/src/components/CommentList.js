@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Comment from './Comment';
 import { connect } from 'react-redux';
 import * as api from '../utils/api';
-import { editComment } from '../actions';
+import { editComment, addComment } from '../actions';
 
 class CommentList extends Component {
   state = {
@@ -18,10 +18,25 @@ class CommentList extends Component {
     const d = new Date();
     const id = this.state.id;
     const timestamp = d.getTime();
-    const body = document.querySelector("#input-comment-body").value;
+    const body = document.querySelector("#edit-comment-body").value;
 
     api.editComment(id, timestamp, body);
     this.props.dispatch(editComment({id, timestamp, body}));
+  }
+
+  add = () => {
+    const id = Math.floor( Math.random() * ( Math.floor(999999) - Math.max(100000) ) ) + Math.max(100000);
+    const d = new Date();
+    const timestamp = d.getTime();
+    const body = document.querySelector("#add-comment-body").value;
+    const author = document.querySelector("#add-comment-author").value;
+    const parentId = this.props.activePost.id;
+    const voteScore = 1;
+    const deleted = false;
+    const parentDeleted = false;
+
+    api.addComment(id, timestamp, body, author, parentId);
+    this.props.dispatch(addComment({ id, parentId, timestamp, body, author, voteScore, deleted, parentDeleted }));
   }
 
   render() {
@@ -30,6 +45,7 @@ class CommentList extends Component {
 
     return (
       <div>
+        <button data-toggle="modal" data-target="#addCommentModal" className='btn btn-primary'>Add Comment</button>
         <ul className='post-list'>
           {ids && ids.map((id) => (
             <li key={id}>
@@ -37,6 +53,33 @@ class CommentList extends Component {
             </li>
           ))}
         </ul>
+
+        <div className="modal" id="addCommentModal">
+          <div className="modal-dialog">
+            <div className="modal-content">
+              <div className="modal-header">
+                <h5 className="modal-title">Add Comment</h5>
+                <button className="close" data-dismiss="modal">&times;</button>
+              </div>
+              <div className="modal-body">
+                <form>
+                  <div className="form-group">
+                    <label htmlFor="author">Author</label>
+                    <textarea id="add-comment-author" rows="1" className="form-control"></textarea>
+                  </div>
+                  <div className="form-group">
+                    <label htmlFor="body">Body</label>
+                    <textarea id="add-comment-body" rows="5" className="form-control"></textarea>
+                  </div>
+                </form>
+              </div>
+              <div className="modal-footer">
+                <button className="btn btn-primary" onClick={this.add} data-dismiss="modal">Submit</button>
+                <button className="btn btn-secondary" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
 
         <div className="modal" id="editCommentModal">
           <div className="modal-dialog">
@@ -49,7 +92,7 @@ class CommentList extends Component {
                 <form>
                   <div className="form-group">
                     <label htmlFor="body">Body</label>
-                    <textarea id="input-comment-body" rows="5" className="form-control"></textarea>
+                    <textarea id="edit-comment-body" rows="5" className="form-control"></textarea>
                   </div>
                 </form>
               </div>
@@ -67,7 +110,8 @@ class CommentList extends Component {
 
 function mapStateToProps (state) {
   return {
-    comments: state.commentList
+    comments: state.commentList,
+    activePost: state.activePost
   }
 }
 
