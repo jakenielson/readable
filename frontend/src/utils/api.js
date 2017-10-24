@@ -43,3 +43,6 @@ export const deleteComment = (id) =>
 
 export const editComment = (id, timestamp, body) =>
   fetch(`${api}/comments/${id}`, { method: "PUT", headers, body: JSON.stringify({ timestamp, body })})
+
+export const addPost = (id, timestamp, title, body, author, category) =>
+  fetch(`${api}/posts`, { method: "POST", headers, body: JSON.stringify({ id, timestamp, title, body, author, category })})

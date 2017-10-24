@@ -24,10 +24,6 @@ class CommentList extends Component {
     this.props.dispatch(editComment({id, timestamp, body}));
   }
 
-  show = () => {
-    api.getComments('8xf0y6ziyjabvozdd253nd').then(res => console.log('getComments', res));
-  }
-
   render() {
     const { comments } = this.props;
     const ids = Object.keys(comments).filter(key => !comments[key].deleted);
@@ -41,8 +37,6 @@ class CommentList extends Component {
             </li>
           ))}
         </ul>
-
-        <button onClick={this.show}>show</button>
 
         <div className="modal" id="editCommentModal">
           <div className="modal-dialog">

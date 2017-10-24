@@ -21,8 +21,8 @@ class Post extends Component {
   }
 
   edit = () => {
-    const title = document.querySelector("#input-post-title").value;
-    const body = document.querySelector("#input-post-body").value;
+    const title = document.querySelector("#edit-post-title").value;
+    const body = document.querySelector("#edit-post-body").value;
 
     api.editPost(this.props.post.id, title, body);
     this.props.dispatch(editPost({...this.props.post, title, body}));
@@ -60,11 +60,11 @@ class Post extends Component {
                 <form>
                   <div className="form-group">
                     <label htmlFor="title">Title</label>
-                    <textarea id="input-post-title" rows="2" className="form-control" defaultValue={post.title}></textarea>
+                    <textarea id="edit-post-title" rows="2" className="form-control" defaultValue={post.title}></textarea>
                   </div>
                   <div className="form-group">
                     <label htmlFor="body">Body</label>
-                    <textarea id="input-post-body" rows="5" className="form-control" defaultValue={post.body}></textarea>
+                    <textarea id="edit-post-body" rows="5" className="form-control" defaultValue={post.body}></textarea>
                   </div>
                 </form>
               </div>
