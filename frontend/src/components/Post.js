@@ -32,29 +32,35 @@ class Post extends Component {
     const { post } = this.props;
     return(
       <div className="post">
-        <div className="post-header media m-2">
-          <div className="d-flex flex-column m-3">
-            <button onClick={this.upvote}><i className="fa fa-arrow-up"></i></button>
-            <span className="text-center">{ post.voteScore }</span>
-            <button onClick={this.downvote}><i className="fa fa-arrow-down"></i></button>
+        <div className="post-header card bg-secondary mx-3 my-2">
+          <div className="card-body media m-2 py-0">
+            <div className="d-flex flex-column m-3">
+              <button onClick={this.upvote} className="btn btn-sm btn-dark"><i className="fa fa-arrow-up"></i></button>
+              <span className="text-center text-dark font-weight-bold my-1">{ post.voteScore }</span>
+              <button onClick={this.downvote} className="btn btn-sm btn-dark"><i className="fa fa-arrow-down"></i></button>
+            </div>
+            <div className="media-body d-flex flex-column justify-content-between align-items-start m-3">
+              <h4 className="text-dark font-weight-bold">{ post.title }</h4>
+              <span className="text-dark small">submitted {post.timestamp} ago by {post.author} to {post.category}</span>
+              <div className="btn-group mt-2">
+                <Link className="btn btn-danger btn-sm" to={`/`} onClick={this.delete}>Delete</Link>
+                <button className="btn btn-dark btn-sm" data-toggle="modal" data-target="#editPostModal">Edit</button>
+              </div>
+            </div>
           </div>
-          <div className="media-body m-3">
-            <h3>{ post.title }</h3>
-            <Link to={`/`} onClick={this.delete}>Delete</Link>
-            <button data-toggle="modal" data-target="#editPostModal">Edit</button>
+          <div className="post-body card bg-dark mx-3 my-2">
+            <div className="card-body media m-2 py-0">
+              <p className="text-light">{ post.body }</p>
+            </div>
           </div>
-        </div>
-
-        <div className="post-body m-2">
-          <p>{ post.body }</p>
         </div>
 
         <div className="modal" id="editPostModal">
           <div className="modal-dialog">
             <div className="modal-content">
-              <div className="modal-header">
-                <h5 className="modal-title">Edit Post</h5>
-                <button className="close" data-dismiss="modal">&times;</button>
+              <div className="modal-header bg-dark">
+                <h5 className="modal-title text-light">Edit Post</h5>
+                <button className="close text-light" data-dismiss="modal">&times;</button>
               </div>
               <div className="modal-body">
                 <form>

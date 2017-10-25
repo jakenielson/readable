@@ -24,15 +24,18 @@ class PostPreview extends Component {
     const { post, selectPost } = this.props;
 
     return (
-      <div className="post-preview media m-2">
-        <div className="d-flex flex-column m-3">
-          <button onClick={this.upvote}><i className="fa fa-arrow-up"></i></button>
-          <span className="text-center">{ post.voteScore }</span>
-          <button onClick={this.downvote}><i className="fa fa-arrow-down"></i></button>
-        </div>
-        <div className="media-body m-3">
-          <Link to={`/post/${ post.id }`} onClick={ () => { selectPost(post.id) } }><h3>{ post.title }</h3></Link>
-          <button onClick={this.delete}>Delete</button>
+      <div className="card mx-3 my-2 bg-secondary">
+        <div className="post-preview card-body media m-2 py-0">
+          <div className="d-flex flex-column m-3">
+            <button onClick={this.upvote} className="btn btn-sm btn-dark"><i className="fa fa-arrow-up"></i></button>
+            <span className="text-center text-dark font-weight-bold my-1">{ post.voteScore }</span>
+            <button onClick={this.downvote} className="btn btn-sm btn-dark"><i className="fa fa-arrow-down"></i></button>
+          </div>
+          <div className="media-body d-flex flex-column justify-content-between align-items-start m-3">
+            <Link to={`/post/${ post.id }`} onClick={ () => { selectPost(post.id) } }><h4 className="text-dark font-weight-bold">{ post.title }</h4></Link>
+            <span className="text-dark small">submitted {post.timestamp} ago by {post.author} to {post.category}</span>
+            <button className="btn btn-sm btn-danger mt-2" onClick={this.delete}>Delete</button>
+          </div>
         </div>
       </div>
     );

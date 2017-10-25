@@ -36,20 +36,20 @@ class PageHeader extends Component {
 
     return(
       <div>
-        <nav className="navbar navbar-expand-sm navbar-light bg-light">
+        <nav className="navbar navbar-expand-sm navbar-danger bg-danger">
           <div className="container">
             <button className="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
               <span className="navbar-toggler-icon"></span>
             </button>
-            <Link to="/" onClick={ () => { showAllPosts() } } className="navbar-brand">{ name }</Link>
-            <button data-toggle="modal" data-target="#addPostModal" className="btn btn-primary">New Post</button>
+            <Link to="/" onClick={ () => { showAllPosts() } } className="navbar-brand text-dark font-weight-bold">{ name }</Link>
+            <button data-toggle="modal" data-target="#addPostModal" className="btn btn-sm btn-dark">New Post</button>
             <div className="collapse navbar-collapse" id="navbarCollapse">
               <ul className="navbar-nav ml-auto">
                 <li className="nav-item">
-                  <Link to="/" onClick={ () => { this.changeCategory('react') } } className="nav-link">react</Link>
+                  <Link to="/" onClick={ () => { this.changeCategory('react') } } className="nav-link text-light">react</Link>
                 </li>
                 <li className="nav-item">
-                  <Link to="/" onClick={ () => { this.changeCategory('redux') } } className="nav-link">redux</Link>
+                  <Link to="/" onClick={ () => { this.changeCategory('redux') } } className="nav-link text-light">redux</Link>
                 </li>
               </ul>
             </div>
@@ -59,15 +59,15 @@ class PageHeader extends Component {
         <div className="modal" id="addPostModal">
           <div className="modal-dialog">
             <div className="modal-content">
-              <div className="modal-header">
-                <h5 className="modal-title">Edit Post</h5>
-                <button className="close" data-dismiss="modal">&times;</button>
+              <div className="modal-header bg-dark">
+                <h5 className="modal-title text-light">New Post</h5>
+                <button className="close text-light" data-dismiss="modal">&times;</button>
               </div>
               <div className="modal-body">
                 <form>
                   <div className="form-group">
                     <label htmlFor="category">Category</label>
-                    <select name="category" id="add-post-category">
+                    <select className="form-control" name="category" id="add-post-category">
                       <option value="react">react</option>
                       <option value="redux">redux</option>
                     </select>
@@ -87,7 +87,7 @@ class PageHeader extends Component {
                 </form>
               </div>
               <div className="modal-footer">
-                <button className="btn btn-primary" onClick={this.addPost} data-dismiss="modal">Submit</button>
+                <button className="btn btn-dark" onClick={this.addPost} data-dismiss="modal">Submit</button>
                 <button className="btn btn-secondary" data-dismiss="modal">Close</button>
               </div>
             </div>

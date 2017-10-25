@@ -10,7 +10,7 @@ class CommentList extends Component {
   }
 
   open = (id, body) => {
-    document.querySelector("#input-comment-body").value = body;
+    document.querySelector("#edit-comment-body").value = body;
     this.setState({ id });
   }
 
@@ -44,8 +44,8 @@ class CommentList extends Component {
     const ids = Object.keys(comments).filter(key => !comments[key].deleted);
 
     return (
-      <div>
-        <button data-toggle="modal" data-target="#addCommentModal" className='btn btn-primary'>Add Comment</button>
+      <div className="ml-5">
+        <button data-toggle="modal" data-target="#addCommentModal" className='btn btn-danger btn-sm'>Add Comment</button>
         <ul className='post-list'>
           {ids && ids.map((id) => (
             <li key={id}>
@@ -57,9 +57,9 @@ class CommentList extends Component {
         <div className="modal" id="addCommentModal">
           <div className="modal-dialog">
             <div className="modal-content">
-              <div className="modal-header">
-                <h5 className="modal-title">Add Comment</h5>
-                <button className="close" data-dismiss="modal">&times;</button>
+              <div className="modal-header bg-dark">
+                <h5 className="modal-title text-light">Add Comment</h5>
+                <button className="close text-light" data-dismiss="modal">&times;</button>
               </div>
               <div className="modal-body">
                 <form>
@@ -74,7 +74,7 @@ class CommentList extends Component {
                 </form>
               </div>
               <div className="modal-footer">
-                <button className="btn btn-primary" onClick={this.add} data-dismiss="modal">Submit</button>
+                <button className="btn btn-dark" onClick={this.add} data-dismiss="modal">Submit</button>
                 <button className="btn btn-secondary" data-dismiss="modal">Close</button>
               </div>
             </div>
@@ -84,9 +84,9 @@ class CommentList extends Component {
         <div className="modal" id="editCommentModal">
           <div className="modal-dialog">
             <div className="modal-content">
-              <div className="modal-header">
-                <h5 className="modal-title">Edit Comment</h5>
-                <button className="close" data-dismiss="modal">&times;</button>
+              <div className="modal-header bg-dark">
+                <h5 className="modal-title text-light">Edit Comment</h5>
+                <button className="close text-light" data-dismiss="modal">&times;</button>
               </div>
               <div className="modal-body">
                 <form>
@@ -97,7 +97,7 @@ class CommentList extends Component {
                 </form>
               </div>
               <div className="modal-footer">
-                <button className="btn btn-primary" onClick={this.edit} data-dismiss="modal">Submit</button>
+                <button className="btn btn-dark" onClick={this.edit} data-dismiss="modal">Submit</button>
                 <button className="btn btn-secondary" data-dismiss="modal">Close</button>
               </div>
             </div>
