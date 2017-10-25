@@ -36,7 +36,7 @@ class PageHeader extends Component {
 
     return(
       <div>
-        <nav className="navbar navbar-expand-sm navbar-danger bg-danger">
+        <nav className="navbar navbar-expand-sm navbar-light bg-danger">
           <div className="container">
             <button className="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
               <span className="navbar-toggler-icon"></span>
