@@ -15,6 +15,9 @@ export const CLEAR_COMMENTS = 'CLEAR_COMMENTS';
 export const SELECT_CATEGORY = 'SELECT_CATEGORY';
 export const SELECT_POST = 'SELECT_POST';
 
+export const SORT_TOP = 'SORT_TOP';
+export const SORT_NEW = 'SORT_NEW';
+
 export function addPost ({ id, timestamp, title, body, author, category, voteScore, deleted }) {
   return {
     type: ADD_POST,
@@ -126,5 +129,17 @@ export function selectPost ({ id }) {
   return {
     type: SELECT_POST,
     id
+  }
+}
+
+export function sortTop () {
+  return {
+    type: SORT_TOP
+  }
+}
+
+export function sortNew () {
+  return {
+    type: SORT_NEW
   }
 }

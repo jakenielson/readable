@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Comment from './Comment';
 import { connect } from 'react-redux';
 import * as api from '../utils/api';
-import { editComment, addComment } from '../actions';
+import { editComment, addComment, sortTop, sortNew } from '../actions';
 
 class CommentList extends Component {
   state = {
@@ -39,13 +39,38 @@ class CommentList extends Component {
     this.props.dispatch(addComment({ id, parentId, timestamp, body, author, voteScore, deleted, parentDeleted }));
   }
 
+  sort = (method) => {
+    switch(method) {
+      case 'top':
+        this.props.dispatch(sortTop());
+        break;
+      case 'new':
+        this.props.dispatch(sortNew());
+        break;
+      default:
+        break;
+    }
+  }
+
   render() {
-    const { comments } = this.props;
-    const ids = Object.keys(comments).filter(key => !comments[key].deleted);
+    const { comments, sortMethod } = this.props;
+    let ids = Object.keys(comments).filter(key => !comments[key].deleted);
+
+    switch (sortMethod) {
+      case 'top':
+        ids = ids.sort((a, b) => comments[b].voteScore - comments[a].voteScore);
+        break;
+      case 'new':
+        ids = ids.sort((a, b) => comments[a].timestamp - comments[b].voteScore);
+        break;
+      default:
+        break;
+    }
 
     return (
       <div className="ml-5">
-        <button data-toggle="modal" data-target="#addCommentModal" className='btn btn-danger btn-sm'>Add Comment</button>
+        <p className="sort text-light small ml-3 mb-1">sort by: <a className="red-hover" onClick={ () => this.sort('top')}>top</a> <a className="red-hover" onClick={ () => this.sort('new')}>new</a></p>
+        <button data-toggle="modal" data-target="#addCommentModal" className='btn btn-danger btn-sm ml-3 mb-2'>Add Comment</button>
         <ul className='post-list ml-1'>
           {ids && ids.map((id) => (
             <li key={id}>
@@ -111,7 +136,8 @@ class CommentList extends Component {
 function mapStateToProps (state) {
   return {
     comments: state.commentList,
-    activePost: state.activePost
+    activePost: state.activePost,
+    sortMethod: state.sortMethod.method
   }
 }
 

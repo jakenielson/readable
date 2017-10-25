@@ -14,7 +14,9 @@ import {
   DOWNVOTE_COMMENT,
   CLEAR_COMMENTS,
   SELECT_CATEGORY,
-  SELECT_POST
+  SELECT_POST,
+  SORT_TOP,
+  SORT_NEW
 } from '../actions';
 
 function postList (state = {}, action) {
@@ -165,9 +167,25 @@ function activePost (state = {}, action) {
   }
 }
 
+function sortMethod (state = {method: 'top'}, action) {
+  switch (action.type) {
+    case SORT_TOP:
+      return {
+        method: 'top'
+      }
+    case SORT_NEW:
+      return {
+        method: 'new'
+      }
+    default:
+      return state;
+  }
+}
+
 export default combineReducers({
   postList,
   commentList,
   activeCategory,
-  activePost
+  activePost,
+  sortMethod
 });
