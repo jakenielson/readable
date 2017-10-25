@@ -6,3 +6,11 @@
 .btn {
   cursor: pointer;
 }
+
+a:hover {
+  text-decoration: none;
+}
+
+.red-hover:hover {
+  color: #D33149 !important;
+}
