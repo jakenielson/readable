@@ -29,19 +29,7 @@ class PostList extends Component {
   }
 
   render() {
-    const { posts, sortMethod } = this.props;
-    let ids = Object.keys(posts).filter(key => !posts[key].deleted);
-
-    switch (sortMethod) {
-      case 'top':
-        ids = ids.sort((a, b) => posts[b].voteScore - posts[a].voteScore);
-        break;
-      case 'new':
-        ids = ids.sort((a, b) => posts[a].timestamp - posts[b].voteScore);
-        break;
-      default:
-        break;
-    }
+    const { posts, ids } = this.props;
 
     return (
       <div>
@@ -59,9 +47,22 @@ class PostList extends Component {
 }
 
 function mapStateToProps (state) {
+  let ids = Object.keys(state.postList).filter(key => !state.postList[key].deleted);
+
+  switch (state.sortMethod.method) {
+    case 'top':
+      ids = ids.sort((a, b) => state.postList[b].voteScore - state.postList[a].voteScore);
+      break;
+    case 'new':
+      ids = ids.sort((a, b) => state.postList[a].timestamp - state.postList[b].voteScore);
+      break;
+    default:
+      break;
+  }
+
   return {
     posts: state.postList,
-    sortMethod: state.sortMethod.method
+    ids: ids
   }
 }
 

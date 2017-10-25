@@ -53,19 +53,7 @@ class CommentList extends Component {
   }
 
   render() {
-    const { comments, sortMethod } = this.props;
-    let ids = Object.keys(comments).filter(key => !comments[key].deleted);
-
-    switch (sortMethod) {
-      case 'top':
-        ids = ids.sort((a, b) => comments[b].voteScore - comments[a].voteScore);
-        break;
-      case 'new':
-        ids = ids.sort((a, b) => comments[a].timestamp - comments[b].voteScore);
-        break;
-      default:
-        break;
-    }
+    const { comments, ids } = this.props;
 
     return (
       <div className="ml-5">
@@ -134,10 +122,23 @@ class CommentList extends Component {
 }
 
 function mapStateToProps (state) {
+  let ids = Object.keys(state.commentList).filter(key => !state.commentList[key].deleted);
+
+  switch (state.sortMethod.method) {
+    case 'top':
+      ids = ids.sort((a, b) => state.commentList[b].voteScore - state.commentList[a].voteScore);
+      break;
+    case 'new':
+      ids = ids.sort((a, b) => state.commentList[a].timestamp - state.commentList[b].voteScore);
+      break;
+    default:
+      break;
+  }
+
   return {
     comments: state.commentList,
     activePost: state.activePost,
-    sortMethod: state.sortMethod.method
+    ids: ids
   }
 }
 
