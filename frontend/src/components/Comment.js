@@ -21,6 +21,7 @@ class Comment extends Component {
 
   render() {
     const { comment, open } = this.props;
+    const date = new Date(comment.timestamp).toDateString();
 
     return (
       <div className="card bg-secondary mx-3 my-2">
@@ -32,7 +33,7 @@ class Comment extends Component {
           </div>
           <div className="media-body d-flex flex-column justify-content-between align-items-start m-3">
             <p className="text-dark font-weight-bold">{ comment.body }</p>
-            <span className="text-dark small">submitted {comment.timestamp} ago by {comment.author}</span>
+            <span className="text-dark small">submitted {date} by {comment.author}</span>
             <div className="btn-group mt-2">
               <button className="btn btn-sm btn-danger" onClick={this.delete}>Delete</button>
               <button className="btn btn-sm btn-dark" onClick={ () => { open(comment.id, comment.body) } } data-toggle="modal" data-target="#editCommentModal">Edit</button>

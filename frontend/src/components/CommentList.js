@@ -46,7 +46,7 @@ class CommentList extends Component {
     return (
       <div className="ml-5">
         <button data-toggle="modal" data-target="#addCommentModal" className='btn btn-danger btn-sm'>Add Comment</button>
-        <ul className='post-list'>
+        <ul className='post-list ml-1'>
           {ids && ids.map((id) => (
             <li key={id}>
               <Comment id={ comments[id].id } open={this.open} />

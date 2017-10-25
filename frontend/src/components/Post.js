@@ -30,6 +30,8 @@ class Post extends Component {
 
   render() {
     const { post } = this.props;
+    const date = new Date(post.timestamp).toDateString();
+
     return(
       <div className="post">
         <div className="post-header card bg-secondary mx-3 my-2">
@@ -41,7 +43,7 @@ class Post extends Component {
             </div>
             <div className="media-body d-flex flex-column justify-content-between align-items-start m-3">
               <h4 className="text-dark font-weight-bold">{ post.title }</h4>
-              <span className="text-dark small">submitted {post.timestamp} ago by {post.author} to {post.category}</span>
+              <span className="text-dark small">submitted {date} by {post.author} to {post.category}</span>
               <div className="btn-group mt-2">
                 <Link className="btn btn-danger btn-sm" to={`/`} onClick={this.delete}>Delete</Link>
                 <button className="btn btn-dark btn-sm" data-toggle="modal" data-target="#editPostModal">Edit</button>

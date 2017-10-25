@@ -22,6 +22,7 @@ class PostPreview extends Component {
 
   render() {
     const { post, selectPost } = this.props;
+    const date = new Date(post.timestamp).toDateString();
 
     return (
       <div className="card mx-3 my-2 bg-secondary">
@@ -33,7 +34,7 @@ class PostPreview extends Component {
           </div>
           <div className="media-body d-flex flex-column justify-content-between align-items-start m-3">
             <Link to={`/post/${ post.id }`} onClick={ () => { selectPost(post.id) } }><h4 className="text-dark font-weight-bold">{ post.title }</h4></Link>
-            <span className="text-dark small">submitted {post.timestamp} ago by {post.author} to {post.category}</span>
+            <span className="text-dark small">submitted {date} by {post.author} to {post.category}</span>
             <button className="btn btn-sm btn-danger mt-2" onClick={this.delete}>Delete</button>
           </div>
         </div>
