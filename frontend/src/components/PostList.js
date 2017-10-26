@@ -54,7 +54,7 @@ function mapStateToProps (state) {
       ids = ids.sort((a, b) => state.postList[b].voteScore - state.postList[a].voteScore);
       break;
     case 'new':
-      ids = ids.sort((a, b) => state.postList[a].timestamp - state.postList[b].voteScore);
+      ids = ids.sort((a, b) => state.postList[b].timestamp - state.postList[a].timestamp);
       break;
     default:
       break;

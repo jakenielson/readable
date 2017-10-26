@@ -25,7 +25,8 @@ class CommentList extends Component {
   }
 
   add = () => {
-    const id = Math.floor( Math.random() * ( Math.floor(999999) - Math.max(100000) ) ) + Math.max(100000);
+    let id = Math.floor( Math.random() * ( Math.floor(999999) - Math.max(100000) ) ) + Math.max(100000);
+    id = id.toString();
     const d = new Date();
     const timestamp = d.getTime();
     const body = document.querySelector("#add-comment-body").value;
@@ -56,10 +57,10 @@ class CommentList extends Component {
     const { comments, ids } = this.props;
 
     return (
-      <div className="ml-5">
-        <p className="sort text-light small ml-3 mb-1">sort by: <a className="red-hover" onClick={ () => this.sort('top')}>top</a> <a className="red-hover" onClick={ () => this.sort('new')}>new</a></p>
-        <button data-toggle="modal" data-target="#addCommentModal" className='btn btn-danger btn-sm ml-3 mb-2'>Add Comment</button>
-        <ul className='post-list ml-1'>
+      <div className="ml-3">
+        <p className="sort text-light small mb-1">sort by: <a className="red-hover" onClick={ () => this.sort('top')}>top</a> <a className="red-hover" onClick={ () => this.sort('new')}>new</a></p>
+        <button data-toggle="modal" data-target="#addCommentModal" className='btn btn-danger btn-sm mb-2'>Add Comment</button>
+        <ul className='post-list ml-3'>
           {ids && ids.map((id) => (
             <li key={id}>
               <Comment id={ comments[id].id } open={this.open} />
@@ -129,7 +130,7 @@ function mapStateToProps (state) {
       ids = ids.sort((a, b) => state.commentList[b].voteScore - state.commentList[a].voteScore);
       break;
     case 'new':
-      ids = ids.sort((a, b) => state.commentList[a].timestamp - state.commentList[b].voteScore);
+      ids = ids.sort((a, b) => state.commentList[b].timestamp - state.commentList[a].timestamp);
       break;
     default:
       break;

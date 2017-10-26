@@ -77,7 +77,7 @@ class Post extends Component {
                 </form>
               </div>
               <div className="modal-footer">
-                <button className="btn btn-primary" onClick={this.edit} data-dismiss="modal">Submit</button>
+                <button className="btn btn-dark" onClick={this.edit} data-dismiss="modal">Submit</button>
                 <button className="btn btn-secondary" data-dismiss="modal">Close</button>
               </div>
             </div>

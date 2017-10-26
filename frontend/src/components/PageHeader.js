@@ -16,7 +16,8 @@ class PageHeader extends Component {
   }
 
   addPost = () => {
-    const id = Math.floor( Math.random() * ( Math.floor(999999) - Math.max(100000) ) ) + Math.max(100000);
+    let id = Math.floor( Math.random() * ( Math.floor(999999) - Math.max(100000) ) ) + Math.max(100000);
+    id = id.toString();
     const d = new Date();
     const timestamp = d.getTime();
     const title = document.querySelector("#add-post-title").value;
