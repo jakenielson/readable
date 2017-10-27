@@ -7,6 +7,8 @@ import {
   UPVOTE_POST,
   DOWNVOTE_POST,
   CLEAR_POSTS,
+  UP_NUM_OF_COMMENTS,
+  DOWN_NUM_OF_COMMENTS,
   ADD_COMMENT,
   EDIT_COMMENT,
   DELETE_COMMENT,
@@ -16,10 +18,8 @@ import {
   SELECT_CATEGORY,
   SELECT_POST,
   SORT_TOP,
-  SORT_NEW,
-  UP_NUM_OF_COMMENTS,
-  DOWN_NUM_OF_COMMENTS
-} from '../actions';
+  SORT_NEW
+} from '../actions/types';
 
 function postList (state = {}, action) {
   const { id, title, body } = action;
