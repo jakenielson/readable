@@ -47,10 +47,10 @@ class PageHeader extends Component {
             <div className="collapse navbar-collapse" id="navbarCollapse">
               <ul className="navbar-nav ml-auto">
                 <li className="nav-item">
-                  <Link to="/" onClick={ () => { this.changeCategory('react') } } className="nav-link text-light">react</Link>
+                  <Link to="/react" onClick={ () => { this.changeCategory('react') } } className="nav-link text-light">react</Link>
                 </li>
                 <li className="nav-item">
-                  <Link to="/" onClick={ () => { this.changeCategory('redux') } } className="nav-link text-light">redux</Link>
+                  <Link to="/redux" onClick={ () => { this.changeCategory('redux') } } className="nav-link text-light">redux</Link>
                 </li>
               </ul>
             </div>

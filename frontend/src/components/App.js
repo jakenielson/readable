@@ -27,11 +27,17 @@ class App extends Component {
     return (
       <BrowserRouter>
         <div className="app">
-          <Route path="/post" render={() => (
+          <Route path="/:category/:id" render={() => (
             <div>
               <PageHeader showAllPosts={this.showAllPosts} />
               <Post />
               <CommentList />
+            </div>
+          )}/>
+          <Route exact path="/:category" render={() => (
+            <div>
+              <PageHeader showAllPosts={this.showAllPosts} />
+              <PostList />
             </div>
           )}/>
           <Route exact path="/" render={() => (
