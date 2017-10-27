@@ -4,6 +4,8 @@ export const DELETE_POST = 'DELETE_POST';
 export const UPVOTE_POST = 'UPVOTE_POST';
 export const DOWNVOTE_POST = 'DOWNVOTE_POST';
 export const CLEAR_POSTS = 'CLEAR_POSTS';
+export const UP_NUM_OF_COMMENTS = 'UP_NUM_OF_COMMENTS';
+export const DOWN_NUM_OF_COMMENTS = 'DOWN_NUM_OF_COMMENTS';
 
 export const ADD_COMMENT = 'ADD_COMMENT';
 export const EDIT_COMMENT = 'EDIT_COMMENT';
@@ -18,7 +20,7 @@ export const SELECT_POST = 'SELECT_POST';
 export const SORT_TOP = 'SORT_TOP';
 export const SORT_NEW = 'SORT_NEW';
 
-export function addPost ({ id, timestamp, title, body, author, category, voteScore, deleted }) {
+export function addPost ({ id, timestamp, title, body, author, category, voteScore, deleted, numOfComments }) {
   return {
     type: ADD_POST,
     id,
@@ -28,7 +30,8 @@ export function addPost ({ id, timestamp, title, body, author, category, voteSco
     author,
     category,
     voteScore,
-    deleted
+    deleted,
+    numOfComments
   }
 }
 
@@ -65,6 +68,20 @@ export function downVotePost ({ id }) {
 export function clearPosts () {
   return {
     type: CLEAR_POSTS
+  }
+}
+
+export function upNumOfComments ({ id }) {
+  return {
+    type: UP_NUM_OF_COMMENTS,
+    id
+  }
+}
+
+export function downNumOfComments ({ id }) {
+  return {
+    type: DOWN_NUM_OF_COMMENTS,
+    id
   }
 }
 

@@ -16,7 +16,9 @@ import {
   SELECT_CATEGORY,
   SELECT_POST,
   SORT_TOP,
-  SORT_NEW
+  SORT_NEW,
+  UP_NUM_OF_COMMENTS,
+  DOWN_NUM_OF_COMMENTS
 } from '../actions';
 
 function postList (state = {}, action) {
@@ -24,7 +26,7 @@ function postList (state = {}, action) {
 
   switch (action.type) {
     case ADD_POST:
-      const { timestamp, author, category, voteScore, deleted } = action;
+      const { timestamp, author, category, voteScore, deleted, numOfComments } = action;
 
       return {
         ...state,
@@ -36,7 +38,8 @@ function postList (state = {}, action) {
           author,
           category,
           voteScore,
-          deleted
+          deleted,
+          numOfComments
         }
       }
     case EDIT_POST:
@@ -74,6 +77,22 @@ function postList (state = {}, action) {
       }
     case CLEAR_POSTS:
       return {}
+    case UP_NUM_OF_COMMENTS:
+      return {
+        ...state,
+        [id]: {
+          ...state[id],
+          numOfComments: state[id].numOfComments + 1
+        }
+      }
+    case DOWN_NUM_OF_COMMENTS:
+      return {
+        ...state,
+        [id]: {
+          ...state[id],
+          numOfComments: state[id].numOfComments - 1
+        }
+      }
     default:
       return state;
   }

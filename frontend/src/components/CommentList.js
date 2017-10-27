@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Comment from './Comment';
 import { connect } from 'react-redux';
 import * as api from '../utils/api';
-import { editComment, addComment, sortTop, sortNew } from '../actions';
+import { editComment, addComment, sortTop, sortNew, upNumOfComments } from '../actions';
 
 class CommentList extends Component {
   state = {
@@ -38,6 +38,7 @@ class CommentList extends Component {
 
     api.addComment(id, timestamp, body, author, parentId);
     this.props.dispatch(addComment({ id, parentId, timestamp, body, author, voteScore, deleted, parentDeleted }));
+    this.props.dispatch(upNumOfComments({ id: parentId }));
   }
 
   sort = (method) => {

@@ -34,7 +34,8 @@ class PostPreview extends Component {
           </div>
           <div className="media-body d-flex flex-column justify-content-between align-items-start m-3">
             <Link to={`/${ post.category }/${ post.id }`} onClick={ () => { selectPost(post.id) } }><h4 className="red-hover text-dark font-weight-bold">{ post.title }</h4></Link>
-            <span className="text-dark small">submitted {date} by {post.author} to {post.category}</span>
+            <p className="text-dark small my-0">submitted {date} by {post.author} to {post.category}</p>
+            <p className="text-dark small my-0">{post.numOfComments} comments</p>
             <button className="btn btn-sm btn-danger mt-2" onClick={this.delete}>Delete</button>
           </div>
         </div>

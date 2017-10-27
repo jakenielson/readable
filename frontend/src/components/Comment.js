@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { upVoteComment, downVoteComment, deleteComment } from '../actions';
+import { upVoteComment, downVoteComment, deleteComment, downNumOfComments } from '../actions';
 import * as api from '../utils/api';
 
 class Comment extends Component {
@@ -17,6 +17,7 @@ class Comment extends Component {
   delete = () => {
     api.deleteComment(this.props.comment.id);
     this.props.dispatch(deleteComment(this.props.comment));
+    this.props.dispatch(downNumOfComments({ id: this.props.activePost }));
   }
 
   render() {
@@ -47,7 +48,8 @@ class Comment extends Component {
 
 function mapStateToProps (state, ownProps) {
   return {
-    comment: state.commentList[ownProps.id]
+    comment: state.commentList[ownProps.id],
+    activePost: state.activePost.id
   }
 }
 

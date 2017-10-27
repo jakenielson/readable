@@ -26,9 +26,10 @@ class PageHeader extends Component {
     const category = document.querySelector("#add-post-category").value;
     const voteScore = 1;
     const deleted = false;
+    const numOfComments = 0;
 
     api.addPost(id, timestamp, title, body, author, category);
-    this.props.dispatch(addPost({ id, timestamp, title, body, author, category, voteScore, deleted }));
+    this.props.dispatch(addPost({ id, timestamp, title, body, author, category, voteScore, deleted, numOfComments }));
   }
 
   render() {
