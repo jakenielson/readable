@@ -6,4 +6,4 @@ A content and comment site I am building with React, Redux, and Bootstrap. Model
 
 To run the project, clone or download the repository and navigate to the 'api-server' folder. Install the dependencies with `npm install`. Start the server with `npm start`.
 
-Once the server is running, navigate to the 'frontend' folder. Install the dependencies with `npm install`. Run gulp with `gulp`. Start the app with `npm start`.
+Once the server is running, navigate to the 'frontend' folder. Install the dependencies with `npm install`. Start the app with `npm start`.
