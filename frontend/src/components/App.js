@@ -17,18 +17,17 @@ class App extends Component {
         post.numOfComments = 0;
         this.props.dispatch(addPost(post));
       });
-    }).then(res => {
-      this.initNumOfComments();
-    });
+    }).then(() => { this.initNumOfComments() });
   }
 
   initNumOfComments = () => {
-    this.props.ids.forEach(id => {
+    let ids = Object.keys(this.props.postList).filter(key => !this.props.postList[key].deleted);
+
+    ids.forEach(id => {
       if (this.props.postList[id].numOfComments === 0) {
-        const currentID = id;
-        api.getComments(currentID).then(res => {
+        api.getComments(id).then(res => {
           res.forEach(comment => {
-            this.props.dispatch(upNumOfComments({ id: currentID }));
+            this.props.dispatch(upNumOfComments({ id }));
           })
         })
       }
@@ -45,20 +44,20 @@ class App extends Component {
         <div className="app">
           <Route path="/:category/:id" render={() => (
             <div>
-              <PageHeader showAllPosts={this.showAllPosts} />
+              <PageHeader showAllPosts={this.showAllPosts} initNumOfComments={this.initNumOfComments}/>
               <Post />
               <CommentList />
             </div>
           )}/>
           <Route exact path="/:category" render={() => (
             <div>
-              <PageHeader showAllPosts={this.showAllPosts} />
+              <PageHeader showAllPosts={this.showAllPosts} initNumOfComments={this.initNumOfComments}/>
               <PostList />
             </div>
           )}/>
           <Route exact path="/" render={() => (
             <div>
-              <PageHeader showAllPosts={this.showAllPosts} />
+              <PageHeader showAllPosts={this.showAllPosts} initNumOfComments={this.initNumOfComments}/>
               <PostList />
             </div>
           )}/>
@@ -69,25 +68,11 @@ class App extends Component {
 }
 
 function mapStateToProps (state) {
-  let ids = Object.keys(state.postList).filter(key => !state.postList[key].deleted);
-
-  switch (state.sortMethod.method) {
-    case 'top':
-      ids = ids.sort((a, b) => state.postList[b].voteScore - state.postList[a].voteScore);
-      break;
-    case 'new':
-      ids = ids.sort((a, b) => state.postList[b].timestamp - state.postList[a].timestamp);
-      break;
-    default:
-      break;
-  }
-
   return {
     postList: state.postList,
     commentList: state.commentList,
     activePost: state.activePost,
-    activeCategory: state.activeCategory,
-    ids: ids
+    activeCategory: state.activeCategory
   }
 }
 

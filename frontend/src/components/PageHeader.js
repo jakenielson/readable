@@ -10,9 +10,12 @@ class PageHeader extends Component {
     this.props.dispatch(clearPosts());
     api.getPostsInCategory(category).then(res => {
       res.forEach(post => {
+        post.numOfComments = 0;
         this.props.dispatch(addPost(post));
       });
-    });
+    }).then(res => {
+      this.props.initNumOfComments();
+    })
   }
 
   addPost = () => {
@@ -101,6 +104,7 @@ class PageHeader extends Component {
 }
 
 function mapStateToProps (state) {
+
   return {
     activeCategory: state.activeCategory
   }
