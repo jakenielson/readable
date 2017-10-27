@@ -29,7 +29,7 @@ class PostList extends Component {
   }
 
   render() {
-    const { posts, ids } = this.props;
+    const { ids } = this.props;
 
     return (
       <div>
@@ -61,7 +61,6 @@ function mapStateToProps (state) {
   }
 
   return {
-    posts: state.postList,
     ids: ids
   }
 }
