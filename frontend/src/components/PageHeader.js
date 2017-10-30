@@ -2,22 +2,9 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import * as api from '../utils/api';
-import { addPost, selectCategory, clearPosts } from '../actions';
+import { addPost } from '../actions';
 
 class PageHeader extends Component {
-  changeCategory = (category) => {
-    this.props.dispatch(selectCategory({ category }));
-    this.props.dispatch(clearPosts());
-    api.getPostsInCategory(category).then(res => {
-      res.forEach(post => {
-        post.numOfComments = 0;
-        this.props.dispatch(addPost(post));
-      });
-    }).then(res => {
-      this.props.initNumOfComments();
-    })
-  }
-
   addPost = () => {
     let id = Math.floor( Math.random() * ( Math.floor(999999) - Math.max(100000) ) ) + Math.max(100000);
     id = id.toString();
@@ -36,8 +23,8 @@ class PageHeader extends Component {
   }
 
   render() {
-    const { showAllPosts, activeCategory } = this.props;
-    const name = activeCategory.category || 'readable';
+    const { category } = this.props;
+    const name = category || 'readable';
 
     return(
       <div>
@@ -46,15 +33,15 @@ class PageHeader extends Component {
             <button className="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
               <span className="navbar-toggler-icon"></span>
             </button>
-            <Link to="/" onClick={ () => { showAllPosts() } } className="navbar-brand text-dark font-weight-bold">{ name }</Link>
+            <Link to="/" className="navbar-brand text-dark font-weight-bold">{ name }</Link>
             <button data-toggle="modal" data-target="#addPostModal" className="btn btn-sm btn-dark">New Post</button>
             <div className="collapse navbar-collapse" id="navbarCollapse">
               <ul className="navbar-nav ml-auto">
                 <li className="nav-item">
-                  <Link to="/react" onClick={ () => { this.changeCategory('react') } } className="nav-link text-light">react</Link>
+                  <Link to="/react" className="nav-link text-light">react</Link>
                 </li>
                 <li className="nav-item">
-                  <Link to="/redux" onClick={ () => { this.changeCategory('redux') } } className="nav-link text-light">redux</Link>
+                  <Link to="/redux" className="nav-link text-light">redux</Link>
                 </li>
               </ul>
             </div>
@@ -104,9 +91,7 @@ class PageHeader extends Component {
 }
 
 function mapStateToProps (state) {
-
   return {
-    activeCategory: state.activeCategory
   }
 }
 

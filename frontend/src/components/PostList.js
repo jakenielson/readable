@@ -31,8 +31,6 @@ class PostList extends Component {
   render() {
     const { ids } = this.props;
 
-    console.log('PostList props', this.props);
-
     return (
       <div>
         <span className="sort text-light small ml-3 mb-1">sort by: <a className="red-hover" onClick={ () => this.sort('top')}>top</a> <a className="red-hover" onClick={ () => this.sort('new')}>new</a></span>
