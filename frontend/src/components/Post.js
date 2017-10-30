@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { upVotePost, downVotePost, deletePost, editPost } from '../actions';
 import * as api from '../utils/api';
+import CommentList from './CommentList';
 
 class Post extends Component {
   upvote = () => {
@@ -84,6 +85,8 @@ class Post extends Component {
             </div>
           </div>
         </div>
+        
+        <CommentList />
       </div>
     )
   }

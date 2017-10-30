@@ -6,7 +6,6 @@ import { addPost, selectCategory, clearPosts, upNumOfComments } from '../actions
 import PostList from './PostList';
 import PageHeader from './PageHeader';
 import Post from './Post';
-import CommentList from './CommentList';
 
 class App extends Component {
   showAllPosts = () => {
@@ -42,25 +41,13 @@ class App extends Component {
     return (
       <BrowserRouter>
         <div className="app">
-          <Route path="/:category/:id" render={() => (
-            <div>
-              <PageHeader showAllPosts={this.showAllPosts} initNumOfComments={this.initNumOfComments}/>
-              <Post />
-              <CommentList />
-            </div>
-          )}/>
-          <Route exact path="/:category" render={() => (
-            <div>
-              <PageHeader showAllPosts={this.showAllPosts} initNumOfComments={this.initNumOfComments}/>
-              <PostList />
-            </div>
-          )}/>
-          <Route exact path="/" render={() => (
-            <div>
-              <PageHeader showAllPosts={this.showAllPosts} initNumOfComments={this.initNumOfComments}/>
-              <PostList />
-            </div>
-          )}/>
+          <PageHeader showAllPosts={this.showAllPosts} initNumOfComments={this.initNumOfComments}/>
+
+          <Route path="/:category/:id" component={Post}/>
+
+          <Route exact path="/:category" component={PostList}/>
+
+          <Route exact path="/" component={PostList}/>
         </div>
       </BrowserRouter>
     );
