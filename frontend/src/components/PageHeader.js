@@ -43,6 +43,9 @@ class PageHeader extends Component {
                 <li className="nav-item">
                   <Link to="/redux" className="nav-link text-light">redux</Link>
                 </li>
+                <li className="nav-item">
+                  <Link to="/udacity" className="nav-link text-light">udacity</Link>
+                </li>
               </ul>
             </div>
           </div>
@@ -62,6 +65,7 @@ class PageHeader extends Component {
                     <select className="form-control" name="category" id="add-post-category">
                       <option value="react">react</option>
                       <option value="redux">redux</option>
+                      <option value="udacity">udacity</option>
                     </select>
                   </div>
                   <div className="form-group">
