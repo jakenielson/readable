@@ -101,9 +101,9 @@ class Post extends Component {
   }
 }
 
-function mapStateToProps (state, ownProps) {
+function mapStateToProps (state) {
   return {
-    post: state.postList[ownProps.id]
+    post: state.postList[state.activePost.id]
   }
 }
 

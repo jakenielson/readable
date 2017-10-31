@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import PostPreview from './PostPreview';
 import { connect } from 'react-redux';
-import * as api from '../utils/api';
-import { selectPost, clearComments, addComment, sortTop, sortNew } from '../actions';
+import { sortTop, sortNew } from '../actions';
 
 class PostList extends Component {
   sort = (method) => {

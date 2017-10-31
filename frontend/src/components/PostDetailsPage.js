@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import Post from './Post';
 import PageHeader from './PageHeader';
 import * as api from '../utils/api';
-import { addPost, clearPosts, upNumOfComments, clearComments, addComment } from '../actions';
+import { addPost, clearPosts, upNumOfComments, clearComments, addComment, selectPost } from '../actions';
 
 class PostDetailsPage extends Component {
   loadPosts = () => {
@@ -35,8 +35,9 @@ class PostDetailsPage extends Component {
 
   loadComments = () => {
     const id = this.props.match.params.id;
-
+    this.props.dispatch(selectPost({ id }));
     this.props.dispatch(clearComments());
+
     api.getComments(id).then(res => {
       res.forEach(comment => {
         this.props.dispatch(addComment(comment));
@@ -53,7 +54,7 @@ class PostDetailsPage extends Component {
     return (
       <div className="postDetailsPage">
         <PageHeader />
-        <Post id={this.props.match.params.id}/>
+        <Post/>
       </div>
     );
   }
