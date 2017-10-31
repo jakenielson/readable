@@ -5,16 +5,6 @@ import * as api from '../utils/api';
 import { selectPost, clearComments, addComment, sortTop, sortNew } from '../actions';
 
 class PostList extends Component {
-  selectPost = (id) => {
-    this.props.dispatch(selectPost({ id }));
-    this.props.dispatch(clearComments());
-    api.getComments(id).then(res => {
-      res.forEach(comment => {
-        this.props.dispatch(addComment(comment));
-      })
-    });
-  }
-
   sort = (method) => {
     switch(method) {
       case 'top':
@@ -37,7 +27,7 @@ class PostList extends Component {
         <ul className='post-list'>
           {ids && ids.map((id) => (
             <li key={id}>
-              <PostPreview id={ id } selectPost={this.selectPost}/>
+              <PostPreview id={ id }/>
             </li>
           ))}
         </ul>
