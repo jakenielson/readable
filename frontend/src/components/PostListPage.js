@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import PostList from './PostList';
 import PageHeader from './PageHeader';
 import * as api from '../utils/api';
-import { addPost, clearPosts, upNumOfComments } from '../actions';
+import { addPost, clearPosts, upNumOfComments } from '../actions/posts';
 
 class PostListPage extends Component {
   showAllPosts = () => {

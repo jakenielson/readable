@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import * as api from '../utils/api';
-import { addPost } from '../actions';
+import { addPost } from '../actions/posts';
 
 class PageHeader extends Component {
   addPost = () => {

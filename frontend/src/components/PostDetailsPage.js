@@ -3,7 +3,9 @@ import { connect } from 'react-redux';
 import Post from './Post';
 import PageHeader from './PageHeader';
 import * as api from '../utils/api';
-import { addPost, clearPosts, upNumOfComments, clearComments, addComment, selectPost } from '../actions';
+import { addPost, clearPosts, upNumOfComments } from '../actions/posts';
+import { clearComments, addComment } from '../actions/comments';
+import { selectPost } from '../actions/select';
 
 class PostDetailsPage extends Component {
   loadPosts = () => {

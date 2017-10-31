@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { upVotePost, downVotePost, deletePost, editPost } from '../actions';
+import { upVotePost, downVotePost, deletePost, editPost } from '../actions/posts';
 import * as api from '../utils/api';
 import CommentList from './CommentList';
 

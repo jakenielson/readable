@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import Comment from './Comment';
 import { connect } from 'react-redux';
 import * as api from '../utils/api';
-import { editComment, addComment, sortTop, sortNew, upNumOfComments } from '../actions';
+import { editComment, addComment } from '../actions/comments';
+import { sortTop, sortNew } from '../actions/sort';
+import { upNumOfComments } from '../actions/posts';
 
 class CommentList extends Component {
   state = {

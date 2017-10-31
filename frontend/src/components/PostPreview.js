@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { upVotePost, downVotePost, deletePost } from '../actions';
+import { upVotePost, downVotePost, deletePost } from '../actions/posts';
 import * as api from '../utils/api';
 
 class PostPreview extends Component {

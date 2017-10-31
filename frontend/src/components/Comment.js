@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { upVoteComment, downVoteComment, deleteComment, downNumOfComments } from '../actions';
+import { upVoteComment, downVoteComment, deleteComment } from '../actions/comments';
+import { downNumOfComments } from '../actions/posts';
 import * as api from '../utils/api';
 
 class Comment extends Component {
