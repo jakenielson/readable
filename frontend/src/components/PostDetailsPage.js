@@ -2,49 +2,21 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Post from './Post';
 import PageHeader from './PageHeader';
-import * as api from '../utils/api';
-import { addPost, clearPosts, upNumOfComments } from '../actions/posts';
-import { clearComments, addComment } from '../actions/comments';
+import { clearPosts, fetchPostsInCategory } from '../actions/posts';
+import { clearComments, fetchComments } from '../actions/comments';
 import { selectPost } from '../actions/select';
 
 class PostDetailsPage extends Component {
   loadPosts = () => {
     this.props.dispatch(clearPosts());
-
-    api.getPostsInCategory(this.props.match.params.category).then(res => {
-      res.forEach(post => {
-        post.numOfComments = 0;
-        this.props.dispatch(addPost(post));
-      });
-    }).then(res => {
-      this.initNumOfComments();
-    })
-  }
-
-  initNumOfComments = () => {
-    let ids = Object.keys(this.props.postList).filter(key => !this.props.postList[key].deleted);
-
-    ids.forEach(id => {
-      if (this.props.postList[id].numOfComments === 0) {
-        api.getComments(id).then(res => {
-          res.forEach(comment => {
-            this.props.dispatch(upNumOfComments({ id }));
-          })
-        })
-      }
-    })
+    this.props.dispatch(fetchPostsInCategory(this.props.match.params.category))
   }
 
   loadComments = () => {
     const id = this.props.match.params.id;
     this.props.dispatch(selectPost({ id }));
     this.props.dispatch(clearComments());
-
-    api.getComments(id).then(res => {
-      res.forEach(comment => {
-        this.props.dispatch(addComment(comment));
-      })
-    });
+    this.props.dispatch(fetchComments(id));
   }
 
   componentWillMount = () => {

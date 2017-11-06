@@ -9,6 +9,8 @@ import {
   DOWN_NUM_OF_COMMENTS
 } from './types';
 
+import * as api from '../utils/api';
+
 export function addPost ({ id, timestamp, title, body, author, category, voteScore, deleted, numOfComments }) {
   return {
     type: ADD_POST,
@@ -73,3 +75,35 @@ export function downNumOfComments ({ id }) {
     id
   }
 }
+
+export const fetchAllPosts = () => dispatch => (
+  api.getPosts()
+    .then(res => {
+      res.forEach(post => {
+        post.numOfComments = 0;
+        api.getComments(post.id)
+          .then(res => {
+            res.forEach(comment => {
+              post.numOfComments += 1;
+            });
+            dispatch(addPost(post));
+          })
+      });
+    })
+);
+
+export const fetchPostsInCategory = (category) => dispatch => (
+  api.getPostsInCategory(category)
+    .then(res => {
+      res.forEach(post => {
+        post.numOfComments = 0;
+        api.getComments(post.id)
+          .then(res => {
+            res.forEach(comment => {
+              post.numOfComments += 1;
+            });
+            dispatch(addPost(post));
+          })
+      });
+    })
+);

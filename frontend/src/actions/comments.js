@@ -7,6 +7,8 @@ import {
   CLEAR_COMMENTS
 } from './types';
 
+import * as api from '../utils/api';
+
 export function addComment ({ id, parentId, timestamp, body, author, voteScore, deleted, parentDeleted }) {
   return {
     type: ADD_COMMENT,
@@ -56,3 +58,12 @@ export function clearComments () {
     type: CLEAR_COMMENTS
   }
 }
+
+export const fetchComments = (id) => dispatch => (
+  api.getComments(id)
+    .then(res => {
+      res.forEach(comment => {
+        dispatch(addComment(comment));
+      })
+    })
+);
